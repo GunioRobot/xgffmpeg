@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- *  this XgFFMpeg_Video class converts/cuts video sources
+ *  this XgFFMpeg_Video class cuts / converts / thumb video sources
  *
  *  @autor      f.fiebig <webpiraten>
  *  @version    2.0
