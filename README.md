@@ -1,6 +1,6 @@
 # XgFFMpeg
 
-XgFFMpeg class converts/cuts video sources
+XgFFMpeg class convert / cut / thumb video sources
 
 - @autor       f.fiebig <webpiraten>
 - @version     2.0

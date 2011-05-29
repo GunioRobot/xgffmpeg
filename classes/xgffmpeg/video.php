@@ -54,13 +54,21 @@ class XgFFMpeg_Video
     public function thumb($source, $target, $offset = '00:00:50', $format = '100x80')
     {
         $this->execute('ffmpeg -y -i '.$source.' -f mjpeg -ss '.$offset.' -vframes 1 -s '.$format.' -an '.$target);
-        return $target;
+        if(is_file($target))
+        {
+            return $target;
+        }
+        throw new Exception('Thumbnail could not be created!');
     }
 
     public function clip($source, $target, $offset = '00:00:50', $duration = '00:00:50')
     {
         $this->execute('ffmpeg -i '.$source.' -ss '.$offset.' -t '.$duration.' '.$target);
-        return $target;
+        if(is_file($target))
+        {
+            return $target;
+        }
+        throw new Exception('Clip could not be created!');
     }
 
     public function preset($source, $target, $preset)
@@ -70,12 +78,16 @@ class XgFFMpeg_Video
         {
             $command    = $presets[$preset]['command'];
             $extension  = $presets[$preset]['extension'];
-            if(!strrchr($target, $extension))
+            if(!strrchr($target, '.'.$extension))
             {
                 $target = $target.'.'.$extension;
             }
             $this->execute('ffmpeg -i '.$source.' '.$command.' '.$target);
-            return $target;
+            if(is_file($target))
+            {
+                return $target;
+            }
+            throw new Exception('Converted file could not be created!');
         }
         throw new Exception($preset.' not available!');
     }
@@ -86,9 +98,6 @@ class XgFFMpeg_Video
         passthru(Kohana::config('xgffmpeg.ffmpeg_path').$command.' 2>&1');
         $retval = ob_get_contents();
         ob_end_clean();
-
-//print_r($retval);
-
         return $retval;
     }
 }

@@ -4,17 +4,17 @@ class Controller_XgFFMpeg extends Controller
 {
     public function action_index()
     {
-        /* be aware that video conversion can consumes a lot of cpu / ram / time usage */
+        /* be aware that video conversion can consume a lot of cpu / ram / time usage */
         $ffmpeg = new XgFFMpeg_Video();
-        
+
         /* get ffmpeg version info */
         $version = $ffmpeg->version();
         var_dump($version);
-        
+
         /* get video file info */
         $info = $ffmpeg->info(Kohana::config('xgffmpeg.asset_path').'test.mp4');
         var_dump($info);
-        
+
         /* create thumbnail from video file */
         $source = Kohana::config('xgffmpeg.asset_path').'test.mp4';
         $target = Kohana::config('xgffmpeg.asset_path').'test.jpg';
@@ -27,7 +27,7 @@ class Controller_XgFFMpeg extends Controller
         $clip = $ffmpeg->clip($source, $target, '00:00:30', '00:00:30');
         var_dump($clip);
 
-        /* use presets */
+        /* use presets to convert video file */
         $source = $clip;
         $target = Kohana::config('xgffmpeg.asset_path').'test_clip_flv_converted.flv';
         $preset = $ffmpeg->preset($source, $target, 'flv_320x180');

@@ -1,9 +1,9 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 return array(
-    'ffmpeg_path'   => '/usr/local/bin/', // path to your local ffmpeg installation
+    'ffmpeg_path'   => '/usr/local/bin/',               // path to your local ffmpeg installation
     'asset_path'    => '/home/modules/xgffmpeg/media/', // path to sources - make shure this path is writable
-    'presets'       => array(
+    'presets'       => array(                           // keep in mind that params may vary depending on ffmpeg version
         'ms_avi_640x480' => array(
             'extension' => 'avi',
             'command'   => '-acodec libmp3lame -vcodec msmpeg4 -ab 192kb -b 1000kb -s 640x480 -ar 44100',
